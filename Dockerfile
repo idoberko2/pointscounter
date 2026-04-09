@@ -27,7 +27,6 @@ FROM node:20-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=3000
 
 # Copy production node_modules from deps stage
 COPY --from=deps /app/node_modules ./node_modules
@@ -42,6 +41,4 @@ RUN mkdir -p /app/data && chown -R node:node /app
 
 USER node
 
-EXPOSE 3000
-
-CMD ["node", "dist/index.js"]
+CMD node dist/index.js
