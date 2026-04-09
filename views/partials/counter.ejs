@@ -1,0 +1,54 @@
+<div id="counter-content" class="space-y-12">
+    <!-- Points Display -->
+    <div class="relative">
+        <span class="text-8xl font-black text-gray-900 block tabular-nums animate-pulse-once">
+            <%= points %>
+        </span>
+        <div class="text-gray-400 mt-2 text-xl font-medium">מתוך <%= target %></div>
+    </div>
+
+    <!-- Progress Bar Container -->
+    <div class="w-full bg-gray-100 rounded-full h-8 overflow-hidden shadow-inner border border-gray-200">
+        <div 
+            class="progress-bar h-full rounded-full flex items-center justify-center text-xs font-bold text-white shadow-lg" 
+            style="width: <%= progress %>%; background-color: hsl(<%= hue %>, 80%, 45%);"
+        >
+            <% if (progress > 10) { %>
+                <%= Math.round(progress) %>%
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex gap-6 justify-center">
+        <button 
+            hx-post="/decrement" 
+            hx-target="#counter-container"
+            hx-swap="innerHTML"
+            class="bg-red-500 hover:bg-red-600 active:bg-red-700 text-white w-24 h-24 rounded-3xl flex items-center justify-center text-5xl font-bold shadow-lg transform active:scale-90 transition-all focus:outline-none focus:ring-4 focus:ring-red-200"
+            aria-label="הפחת נקודה"
+        >
+            −
+        </button>
+        <button 
+            hx-post="/increment" 
+            hx-target="#counter-container"
+            hx-swap="innerHTML"
+            class="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white w-24 h-24 rounded-3xl flex items-center justify-center text-5xl font-bold shadow-lg transform active:scale-90 transition-all focus:outline-none focus:ring-4 focus:ring-green-200"
+            aria-label="הוסף נקודה"
+        >
+            +
+        </button>
+    </div>
+</div>
+
+<style>
+    @keyframes pulse-once {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .animate-pulse-once {
+        animation: pulse-once 0.3s ease-in-out;
+    }
+</style>
