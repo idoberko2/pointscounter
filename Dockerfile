@@ -9,6 +9,8 @@ RUN npm ci
 
 # Copy source and build
 COPY . .
+# Ensure dist and public exist even if empty or gitignored
+RUN mkdir -p dist public views
 RUN npm run build
 
 # Stage 2: Production Dependencies
